@@ -1,0 +1,99 @@
+/* Generated from 'RCSortingCocktailsort.nrx' 28 May 2026 22:15:44 [v5.10] */
+/* Options: Annotations Binary Comments Decimal Format Implicituses Java Logo Replace Symbols Trace2 Verbose3 */
+
+/* NetRexx */
+
+
+
+
+public class RCSortingCocktailsort{
+ private static final java.lang.String $0="RCSortingCocktailsort.nrx";
+ 
+ @SuppressWarnings("unchecked") 
+ public static void main(java.lang.String $0s[]){
+  java.lang.String placesList[];
+  java.lang.String sortedList[];
+  java.lang.String lists[][];
+  int ln=0;
+  java.lang.String cl[]=null;
+  int ct=0;
+  placesList=new java.lang.String[]{"UK  London","US  New York","US  Boston","US  Washington","UK  Washington","US  Birmingham","UK  Birmingham","UK  Boston"};
+  
+  
+  
+  
+  
+  sortedList=cocktailSort((java.lang.String[])(java.util.Arrays.copyOf((java.lang.Object[])placesList,placesList.length)));
+  
+  lists=new java.lang.String[][]{placesList,sortedList};
+  {int $1=lists.length-1;ln=0;ln:for(;ln<=$1;ln++){
+   cl=lists[ln];
+   {int $2=cl.length-1;ct=0;ct:for(;ct<=$2;ct++){
+    netrexx.lang.RexxIO.Say(cl[ct]);
+    }
+   }/*ct*/
+   netrexx.lang.RexxIO.Say("");
+   }
+  }/*ln*/
+  
+  return;
+  }
+ 
+ 
+ @SuppressWarnings("unchecked") 
+ public static final java.lang.String[] cocktailSort(java.lang.String A[]){
+  int Alength;
+  boolean swapped;
+  int i_=0;
+  java.lang.String swap=null;
+  
+  Alength=A.length;
+  swapped=isFalse();
+  {boolean $3=true;swapped:for(;;){if($3){$3=false;}else{if((!swapped))break;}
+   swapped=isFalse();
+   {int $4=Alength-2;i_=0;i_:for(;i_<=$4;i_++){
+    if ((A[i_].compareTo(A[i_+1]))>0) 
+     {
+      swap=A[i_+1];
+      A[i_+1]=A[i_];
+      A[i_]=swap;
+      swapped=isTrue();
+     }
+    }
+   }/*i_*/
+   if ((!swapped)) 
+    {
+     continue swapped;
+    }
+   swapped=isFalse();
+   {i_=Alength-2;i_:for(;i_>=0;i_--){
+    if ((A[i_].compareTo(A[i_+1]))>0) 
+     {
+      swap=A[i_+1];
+      A[i_+1]=A[i_];
+      A[i_]=swap;
+      swapped=isTrue();
+     }
+    }
+   }/*i_*/
+   }
+  }/*swapped*/
+  
+  return A;
+  }
+ 
+ 
+ @SuppressWarnings("unchecked") 
+ public static final boolean isTrue(){
+  return 1==1;
+  }
+ 
+ 
+ @SuppressWarnings("unchecked") 
+ public static final boolean isFalse(){
+  return (!(isTrue()));
+  }
+ 
+ 
+ private RCSortingCocktailsort(){return;}
+ }

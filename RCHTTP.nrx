@@ -1,0 +1,21 @@
+/* NetRexx */
+options replace format comments java symbols binary
+
+import java.util.Scanner
+import java.net.URL
+import java.net.URI
+
+do
+  rosettaUrl = "https://www.rosettacode.org"
+  rosettaUri = URI(rosettaUrl)
+--sc = Scanner(URL(rosettaUrl).openStream) -- TODO: Depricated
+  sc = Scanner(rosettaUri.toURL.openStream)
+  loop while sc.hasNext
+    say sc.nextLine
+  end
+catch ex = Exception
+  ex.printStackTrace
+end
+
+return
+

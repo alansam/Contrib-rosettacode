@@ -1,0 +1,28 @@
+/* Generated from 'RCAplusB.nrx' 28 May 2026 20:18:12 [v5.10] */
+/* Options: Annotations Binary Comments Decimal Format Implicituses Java Logo Replace Symbols Trace2 Verbose3 */
+
+/* NetRexx */
+
+
+
+
+
+public class RCAplusB{
+ private static final char[] $01={1,10,3,0,1,2,0};
+ private static final netrexx.lang.Rexx $02=new netrexx.lang.Rexx('+');
+ private static final netrexx.lang.Rexx $03=new netrexx.lang.Rexx('=');
+ private static final java.lang.String $0="RCAplusB.nrx";
+ 
+ @SuppressWarnings("unchecked") 
+ public static void main(java.lang.String $0s[]){
+  netrexx.lang.Rexx a=null;
+  netrexx.lang.Rexx b=null;
+  {netrexx.lang.Rexx $1[]=new netrexx.lang.Rexx[3];
+  netrexx.lang.RexxParse.parse(netrexx.lang.RexxIO.Ask(),$01,$1);
+  a=$1[0];b=$1[1];}
+  netrexx.lang.RexxIO.Say((((a.OpCcblank(null,$02)).OpCcblank(null,b)).OpCcblank(null,$03)).OpCcblank(null,a.OpAdd(null,b)));
+  return;}
+ 
+ 
+ private RCAplusB(){return;}
+ }
