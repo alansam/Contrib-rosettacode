@@ -1,0 +1,40 @@
+/* NetRexx */
+options replace format comments java crossref symbols nobinary
+
+-- DANGER!
+-- Do NOT run this program. It attempts to create files and directories into root!
+say "Do NOT run this program. It attempts to create files and directories into root!"
+
+fName = ''; fName[0] = 2; fName[1] = '.' || File.separator || 'output.txt'; fName[2] = File.separator || 'output.txt'
+dName = ''; dName[0] = 2; dName[1] = '.' || File.separator || 'docs';       dName[2] = File.separator || 'docs'
+
+say "Files and directories:"
+say
+say fName[1].right(15) ':' fName[2].right(15)
+say dName[1].right(15) ':' dName[2].right(15)
+say
+
+say "Do NOT run this program. It attempts to create files and directories into root!"
+if 1 then exit 1
+-- Do NOT run this program. It attempts to create files and directories into root!
+
+do
+  loop i_ = 1 to fName[0]
+    say fName[i_]
+    fc = File(fName[i_]).createNewFile()
+    if fc then  say 'File' fName[i_] 'created successfully.'
+    else        say 'File' fName[i_] 'aleady exists.'
+    end i_
+
+  loop i_ = 1 to dName[0]
+    say dName[i_]
+    dc = File(dName[i_]).mkdir()
+    if dc then  say 'Directory' dName[i_] 'created successfully.'
+    else        say 'Directory' dName[i_] 'aleady exists.'
+    end i_
+catch iox = IOException
+  iox.printStackTrace
+end
+
+return
+

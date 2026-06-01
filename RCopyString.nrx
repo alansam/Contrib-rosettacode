@@ -1,0 +1,12 @@
+#!/usr/bin/env nr
+/* NetRexx */
+options replace format comments java crossref symbols nobinary
+
+s1 = 'This is a Rexx string'
+s2 = s1
+
+s2 = s2.changestr(' ', '_')
+
+say s1
+say s2
+
