@@ -32,13 +32,13 @@ Java to attempt to execute the `main()` method of the program specified above
 
 ## Java 2.6 Update
 
-Using the latest version of Java, `java -run *jarfile*` does not respect the Java
+Using the latest version of Java, `java -run [jarfile]` does not respect the Java
 `CLASSPATH` nor the `java -cp *class path entries*` command line switch and the
 the result is that the program fails because it can't find the Rexx classes.
 
 There is a workround that I found onliner; you need to update the jar's manifest
 to explicitly provide a `class path:` entry. This entry should list the contents
-of CLASSPATH as a **space** delimited list. (The convention on UNIX/Linux & MacOS
+of CLASSPATH as ___space___ delimited list. (The convention on UNIX/Linux & MacOS
 is to use the colon as a path delimiter.)
 
 You achieve this piece of magic by creating the jar file as before:
@@ -51,9 +51,9 @@ You achieve this piece of magic by creating the jar file as before:
 
 You must then create a text file with the class path information:
 
-The file can be any name you choose but the contents appear to need to be on
-a single line. The example below has been split at convenient places but in
-reality it is a single line of text.
+The file can be any name you choose (_in this example, __maniupd.cp___) but the contents
+appear to need to be on a single line. The example below has been split at convenient
+places but in reality it is a single line of text.
 
 ### Sample Manifest Update File
 
@@ -65,11 +65,11 @@ reality it is a single line of text.
 
 ```
 
-then update the jar with the new  manifest information  as follows:
+then update the jar with the new manifest information as follows:
 
 ``` sh
 
-    $ uvfm RHailstoneSequence.jar maniupd.cp
+    $ jar uvfm RHailstoneSequence.jar maniupd.cp
 
 ```
 
