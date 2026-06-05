@@ -1,0 +1,166 @@
+#!/usr/bin/env nr
+/* NetRexx */
+options replace format comments java symbols
+
+-- . ... 1 ... ... 2 ... ... 3 ... ... 4 ... ... 5 ... ... 6 ... ... 7 ... ... 8
+-- NetRexx doesn't have a GOTO instruction and unlike Rexx the SIGNAL
+-- instruction is only used to throw exceptions.
+--
+-- Like Rexx however, NetRexx provides the LEAVE and ITERATE instructions.
+-- . ... 1 ... ... 2 ... ... 3 ... ... 4 ... ... 5 ... ... 6 ... ... 7 ... ... 8
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+method main(args = String[]) public static
+
+  showLeave()
+
+  showIterate()
+
+  return
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- LEAVE
+--
+-- The LEAVE instruction causes immediate exit from one or more DO, SELECT
+-- or LOOP constructs.i
+--
+-- A name parameter can be provided to direct LEAVE to a specific end of block
+-- (as defined by a LABEL option or in the case of a controlled LOOP the
+-- control variable of the loop.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+method showLeave() public static
+
+  say
+  say '~'.copies(80)
+  say
+
+  loop xx = 1 to 10
+    say 'in loop ''xx'', iteration:' xx
+
+    if xx = 1 then leave -- loop terminated by leave
+
+    say 'xx'
+    say 'unreachable'
+    end
+
+  say 'value of xx outside of the loop is' xx || '. is it what you''d expect?'
+  say
+  say '~'.copies(80)
+  say
+
+  loop xx = 1 to 10 -- xx is the control variable
+    say 'in loop ''xx'', iteration:' xx
+    loop yy = 1 to 10 -- yy is the control variable
+      say 'in loop ''yy'', iteration:' yy
+      if yy = 3 then leave xx -- xx loop terminated by leave
+      if yy = 4 then leave yy -- yy loop terminated by leave
+      say '...yy'
+
+      end
+      say 'xx'
+
+    end xx
+
+  say 'value of xx outside of the loop is' xx || '. is it what you''d expect?'
+  say 'value of yy outside of the loop is' yy || '. is it what you''d expect?'
+  say
+  say '~'.copies(80)
+  say
+
+  loop label xlabel xx = 1 to 10 -- xx is still the control variable but LABEL takes precidence
+    say 'in loop ''xx'', iteration:' xx
+    say 'xx'
+
+    loop yy = 1 to 10 -- yy is the control variable
+      say 'in loop ''yy'', iteration:' yy
+      say '...yy'
+
+      if yy = 3 then leave xlabel -- xx loop terminated by leave
+
+      end yy
+
+    say 'xx'
+  end xlabel
+
+  say 'value of xx outside of the loop is' xx || '. is it what you''d expect?'
+  say 'value of yy outside of the loop is' yy || '. is it what you''d expect?'
+  say
+  say '~'.copies(80)
+  say
+
+  do label FINIS
+
+    say 'in do block'
+
+    if (1 == 1) then leave FINIS
+    say 'unreachable'
+    signal Exception("Will never happen")
+
+  catch ex = Exception
+    ex.printStackTrace()
+  finally
+    say 'out of do block'
+
+  end FINIS
+
+  say
+  say '~'.copies(80)
+  say
+
+  loop vv over ['A', 'B']
+    select label selecting case vv
+      when 'A' then do; say 'A selected'; say '...'; end
+      when 'B' then do;
+        say 'B selected';
+        if (1 == 1) then leave selecting;
+        say '...';
+        end
+      otherwise do; say 'nl selection'; say '...'; end 
+      end selecting
+    end vv
+
+  say 'value of vv outside of the loop is' vv || '. is it what you''d expect?'
+  say
+  say '~'.copies(80)
+  say
+ 
+  return
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ITERATE
+-- The ITERATE instruction alters flow of control within a LOOP construct.
+-- On encountering an ITERATE instruction, execution of the loop body is
+-- terminated and control is passed directly back to the top of the loop
+-- just as though the last clause in the body of the loop had been executed.
+--
+-- As with LEAVE an optional name parameter can be supplied to direct the
+-- instruction to a loop level outside the current level.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+method showIterate() public static
+
+  say
+  say '.'.copies(80)
+  say
+
+  loop fff = 0 to 9
+  say 'in loop ''fff'', iteration:' fff
+  loop xx = 1 to 3
+    say 'in loop ''xx'', iteration:' xx
+    if fff > 2 then iterate fff
+    say '...xx'
+    end
+  say 'fff'
+  end fff
+
+  say 'value of fff outside of the loop is' fff || '. is it what you''d expect?'
+  say 'value of xx outside of the loop is' xx || '. is it what you''d expect?'
+
+  say
+  say '.'.copies(80)
+  say
+
+  return
+
+-- . ... 1 ... ... 2 ... ... 3 ... ... 4 ... ... 5 ... ... 6 ... ... 7 ... ... 8
+-- . ... 1 ... ... 2 ... ... 3 ... ... 4 ... ... 5 ... ... 6 ... ... 7 ... ... 8
+
