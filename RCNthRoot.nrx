@@ -1,5 +1,5 @@
 /*NetRexx program to calculate the  Nth root of  X,  with  DIGS  accuracy. */
-options replace format comments java symbols /*binary*/
+options decimal replace format comments java symbols /*binary*/
 
 class RCNthRoot
 --class nth_root
