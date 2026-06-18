@@ -1,0 +1,81 @@
+#!/usr/bin/env nr
+/* NetRexx */
+options replace java comments format
+-- . ... 1 ... ... 2 ... ... 3 ... ... 4 ... ... 5 ... ... 6 ... ... 7 ... ... 8
+
+  -- load control values into rexx variables
+  parse '\x00 \x01 \x02 \x03 \x04 \x05 \x06 \x07' NUL   SOH   STX   ETX   EOT   ENQ   ACK   BEL
+  parse '\x08 \x09 \x0a \x0b \x0c \x0d \x0e \x0f' BS    HT    NL    VT    NP    CR    SO    SI
+  parse '\x10 \x11 \x12 \x13 \x14 \x15 \x16 \x17' DLE   DC1   DC2   DC3   DC4   NAK   SYN   ETB
+  parse '\x18 \x19 \x1a \x1b \x1c \x1d \x1e \x1f' CAN   EM    SUB   ESC   FS    GS    RS    US
+  parse '\x7f' DEL
+
+  -- put all the control variables into an array to make it easy to report
+  controls = [-
+    NUL, SOH, STX, ETX, EOT, ENQ, ACK, BEL,-
+    BS,  HT,  NL,  VT,  NP,  CR,  SO,  SI,-
+    DLE, DC1, DC2, DC3, DC4, NAK, SYN, ETB,-
+    CAN, EM,  SUB, ESC, FS,  GS,  RS,  US,-
+    DEL-
+  ]
+
+  -- report - show that all the variables do contain control values
+  --          c2x converts a binary value int printable hexadecimal
+  say nl || 'Check ASCII control code\nvalues 0x00-0x1F & 0x7F' || nl
+  loop cn = 0 to controls.length - 1 by 4
+    if cn < controls.length - 1 then
+      say ': '''controls[cn    ].c2x.right(2, '0')''','-
+              ''controls[cn + 1].c2x.right(2, '0')''','-
+              ''controls[cn + 2].c2x.right(2, '0')''','-
+              ''controls[cn + 3].c2x.right(2, '0')''''
+    else
+      say ': '''controls[cn].c2x.right(2, '0')''''
+  end cn
+  say
+
+  -- an example using some of the control codes to display to the console :
+  say '|Let''s go! ...' || ht || ht || 'add some colour' bel-
+      esc || '[2;33m' || '123' || bs || 'ABC' esc || '[0m ...\-'
+  say '|' || 'more text'
+  say '|' || 'don''t expect to see this' || cr-
+   || '|' || 'back to the start of the line' || nl || 'on a new line? \-'
+  say '| all done'
+
+  return
+
+/*
+The hexadecimal set:
+
+  00 nul   01 soh   02 stx   03 etx   04 eot   05 enq   06 ack   07 bel
+  08 bs    09 ht    0a nl    0b vt    0c np    0d cr    0e so    0f si
+  10 dle   11 dc1   12 dc2   13 dc3   14 dc4   15 nak   16 syn   17 etb
+  18 can   19 em    1a sub   1b esc   1c fs    1d gs    1e rs    1f us
+  20 sp    21  !    22  "    23  #    24  $    25  %    26  &    27  '
+  28  (    29  )    2a  *    2b  +    2c  ,    2d  -    2e  .    2f  /
+  30  0    31  1    32  2    33  3    34  4    35  5    36  6    37  7
+  38  8    39  9    3a  :    3b  ;    3c  <    3d  =    3e  >    3f  ?
+  40  @    41  A    42  B    43  C    44  D    45  E    46  F    47  G
+  48  H    49  I    4a  J    4b  K    4c  L    4d  M    4e  N    4f  O
+  50  P    51  Q    52  R    53  S    54  T    55  U    56  V    57  W
+  58  X    59  Y    5a  Z    5b  [    5c  \    5d  ]    5e  ^    5f  _
+  60  `    61  a    62  b    63  c    64  d    65  e    66  f    67  g
+  68  h    69  i    6a  j    6b  k    6c  l    6d  m    6e  n    6f  o
+  70  p    71  q    72  r    73  s    74  t    75  u    76  v    77  w
+  78  x    79  y    7a  z    7b  {    7c  |    7d  }    7e  ~    7f del
+ */
+/*
+ASCII is the American Standard Code for Information Interchange.
+There are 128 ASCII characters of which the first 32 and the last
+are 'control characters'.
+
+Task
+Show how your language might treat control characters en bloc by using
+an enum, an enum like structure or other approach to associate their
+names with their ASCII values thereby enabling them to be retrieved or
+listed by name.
+
+Technically, the 33rd character 'space' is a printable character, not
+a control character, though you may treat it as the latter for the
+purposes of this task.
+ */
+
