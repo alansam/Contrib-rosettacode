@@ -1,7 +1,7 @@
 /* NetRexx */
 options replace format comments java symbols binary
 
-unixdict = 'unixdict.txt'
+unixdict = 'data/unixdict.txt'
 do
   wmax = Integer.MIN_VALUE
   dwords = ArrayList()
