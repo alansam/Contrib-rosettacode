@@ -1,0 +1,7 @@
+parse source . . name .
+say name.substr(3, 4) name.substr(7, 4)
+
+/* Bsed on the being named Code_Golf.nrx
+parse source . . name .
+say name.substr(1, 4) name.substr(6, 4)
+*/
