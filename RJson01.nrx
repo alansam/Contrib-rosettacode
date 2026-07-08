@@ -47,7 +47,7 @@ class RJson01 public
       SAMPLE_BEAN = DwarfBean( -
         "F2012_2", -
         "Snow White & the Huntsman", -
-        Long(2012), -
+        Long.valueOf(2012), -
         "film", -
         Arrays.asList([String "Beith", "Quert", "Muir", "Coll", "Duir", "Gus", "Gort", "Nion"]) -
         )
@@ -71,7 +71,7 @@ method json2bean(dwarfs) public static returns List
         dwarves = ArrayList()
         jn      = jd.getJSONObject(name)
         title   = jn.getString('title')
-        year    = Long(jn.getLong('year'))
+        year    = Long.valueOf(jn.getLong('year'))
         medium  = jn.getString('medium')
         dwa     = jn.getJSONArray('dwarfs')
         loop di = 0 to dwa.length() - 1
@@ -126,7 +126,7 @@ class RJson01.DwarfBean public binary
 
   method toString public returns String
     ts = StringBuilder()
-    ts.append(String.format("%s@%08x ", [Object this.getClass().getSimpleName(), Integer(hashCode())]))
+    ts.append(String.format("%s@%08x ", [Object this.getClass().getSimpleName(), Integer.valueOf(hashCode())]))
     ts.append('[')
     ts.append('key='String.valueOf(keyGet())', ')
     ts.append('title='String.valueOf(getTitle())', ')

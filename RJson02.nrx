@@ -34,7 +34,7 @@ class RJson02 public
       SAMPLE_BEAN = RJSON02.DwarfBean( -
         /*"F2012_2",*/ -
         "Snow White and the Huntsman", -
-        Long(2012), -
+        Long.valueOf(2012), -
         "film", -
         Arrays.asList([String "Beith", "Quert", "Muir", "Coll", "Duir", "Gus", "Gort", "Nion"]) -
         )
@@ -71,7 +71,7 @@ class RJson02.DwarfBean public binary
 
   method toString public returns String
     ts = StringBuilder()
-    ts.append(String.format("%s@%08x ", [Object this.getClass().getSimpleName(), Integer(hashCode())]))
+    ts.append(String.format("%s@%08x ", [Object this.getClass().getSimpleName(), Integer.valueOf(hashCode())]))
     ts.append('[')
     ts.append('title='String.valueOf(getTitle())', ')
     ts.append('year='String.valueOf(getYear())', ')
