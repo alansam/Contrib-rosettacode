@@ -25,4 +25,10 @@ replay_pid*
 
 # work directories
 work/
+keep/
 cmd/
+
+#work directory links
+tmp
+support
+
